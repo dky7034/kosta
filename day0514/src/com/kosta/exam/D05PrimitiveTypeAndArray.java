@@ -17,9 +17,9 @@ public class D05PrimitiveTypeAndArray {
         }
 
         if (data1 == data2) {
-            System.out.println();
+            System.out.println("배열이 같아요");
         } else {
-            System.out.println();
+            System.out.println("배열이 달라요");
         }
         
 
