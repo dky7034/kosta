@@ -1,3 +1,13 @@
+/**
+ * 
+여기 Java 프로그램은 생년, 생월, 생일, 생시를 입력받아 해당 시간에 따른 사주풀이를 출력하는 코드입니다. 이 프로그램은 이미지에 있는 정보를 바탕으로 작성되었습니다.
+프로그램 설명
+맵핑 배열 정의: zodiacHours와 zodiacInterpretation 배열은 각각 한국의 12지신과 그 해석을 저장합니다. hourRanges는 각 시간대의 시작 시간을 저장합니다.
+입력 처리: 프로그램은 사용자로부터 생년, 생월, 생일, 생시를 입력받습니다.
+사주 및 해석 계산: getZodiacSign과 getZodiacInterpretation 메서드는 입력된 시간을 바탕으로 적절한 12지신과 해석을 결정합니다.
+출력: 프로그램은 입력된 생년월일시와 그에 따른 사주 해석을 출력합니다.
+ * 
+ */
 package com.kosta.exam;
 
 import java.util.Scanner;
@@ -56,3 +66,12 @@ public class HomeWork02 {
         return "Unknown";
     }
 }
+/*
+코드 설명
+zodiacHours 배열: 12지신의 시간을 저장합니다.
+zodiacInterpretation 배열: 각 시간대에 해당하는 사주 해석을 저장합니다.
+hourRanges 배열: 각 시간대의 시작 시간을 저장합니다.
+getZodiacSign 메서드: 입력된 시간을 기준으로 해당하는 12지신을 반환합니다.
+getZodiacInterpretation 메서드: 입력된 시간을 기준으로 해당하는 사주 해석을 반환합니다.
+이 프로그램을 실행하면, 생년월일시를 입력받아 사주풀이를 출력해줍니다. 프로그램의 구조는 기본적인 배열과 반복문을 사용하여 시간대에 맞는 사주를 결정합니다. 필요에 따라 해석을 더 자세히 조정할 수 있습니다.
+ */
