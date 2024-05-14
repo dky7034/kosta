@@ -5,6 +5,13 @@ public class D23MatrixTest {
     public static void main(String[] args) {
         
         // 2차원 배열: 정수형 변수 12개...
+        /* 
+         *       1   2   3   4
+         *   1  [ ] [ ] [ ] [ ]
+         *   2  [ ] [ ] [ ] [ ]
+         *   3  [ ] [ ] [ ] [ ]
+         *   
+        */
         int[][] a = new int[3][4];
 
         int n = 1;
@@ -20,6 +27,13 @@ public class D23MatrixTest {
             for (int elem : row) { // 각 행의 요소를 반복
                 System.out.println("element: " +  elem);
             }
+        }
+        // 이중 for문을 활용한 출력
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<3; j++) {
+                System.out.printf("%5d", a[i][j]);
+            }
+            System.out.println();
         }
 
     }
