@@ -1,4 +1,4 @@
-package com.kosta.homeworks;
+package com.kosta.homework01;
 
 class CellPhone {
     private String name;
