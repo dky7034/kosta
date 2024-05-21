@@ -1,4 +1,4 @@
-package com.kosta.exam07;
+package com.kosta.exam02;
 
 public class Employee {
     protected String name;  // 이름

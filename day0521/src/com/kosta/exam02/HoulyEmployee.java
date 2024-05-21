@@ -1,6 +1,6 @@
-package com.kosta.exam07;
+package com.kosta.exam02;
 
-public class HourlyEmployee extends Employee {
+public abstract class HoulyEmployee extends Employee {
     private int base;	//시간당 임금
     private int hours;	//일한 시간
     private int salary;	//실수령액
@@ -11,15 +11,15 @@ public class HourlyEmployee extends Employee {
         salary = base * hours;
     }
 
-    public HourlyEmployee() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    public HourlyEmployee(String name, String no, int base, int hours) {
-        super(name, no);
-        this.base = base;
-        this.hours = hours;
-    }
+//    public HourlyEmployee() {
+//        super();
+//        // TODO Auto-generated constructor stub
+//    }
+//    public HourlyEmployee(String name, String no, int base, int hours) {
+//        super(name, no);
+//        this.base = base;
+//        this.hours = hours;
+//    }
     @Override
     public String toString() {
         return "HourlyEmployee [base=" + base + ", hours=" + hours + ", salary=" + salary + ", name=" + name + ", no="
@@ -43,7 +43,5 @@ public class HourlyEmployee extends Employee {
     public void setSalary(int salary) {
         this.salary = salary;
     }
-
-
 
 }

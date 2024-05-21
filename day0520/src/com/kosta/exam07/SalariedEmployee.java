@@ -52,14 +52,26 @@ public class SalariedEmployee extends Employee {
         super(name, no);
         this.level = level;
     }
-
+    
+    // 메서드 오버라이딩
     @Override
     public void computeSalary() {
-        switch (level) {
+        switch (level) { // 호봉은 3호봉까지 있는 거로 가정
             case 1: base = 4000000; allowances = 400000; break;
             case 2: base = 5000000; allowances = 500000; break;
             case 3: base = 6000000; allowances = 600000; break;
         }
         salary = base + allowances;
+    }
+
+    // toString override
+    @Override
+    public String toString() {
+        return "SalariedEmployee{" +
+                "salary=" + salary +
+                ", level=" + level +
+                ", base=" + base +
+                ", allowances=" + allowances +
+                '}';
     }
 }
