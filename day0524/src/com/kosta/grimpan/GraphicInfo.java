@@ -1,6 +1,8 @@
-package com.kosta.exam05;
+package com.kosta.grimpan;
 
-public class GraphicInfo {
+import java.io.Serializable;
+
+public class GraphicInfo implements Serializable {
     private int x1;
     private int y1;
     private int x2;

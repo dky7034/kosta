@@ -1,4 +1,4 @@
-package com.kosta.exam05;
+package com.kosta.grimpan;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
