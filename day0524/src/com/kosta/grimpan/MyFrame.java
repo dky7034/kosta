@@ -6,10 +6,14 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
+// MyFrame 클래스는 Frame을 상속받아 GUI 컴포넌트를 설정합니다.
 public class MyFrame extends Frame {
+    // DrawPanel 클래스: 실제로 그림을 그리는 클래스
     DrawPanel drawPanel;
 
+    // View
     public MyFrame() {
+        // MyFrame 객체 생성 시 실제로 그림을 그리는 클래스인 drawPanel 클래스 객체도 생성합니다.
         drawPanel = new DrawPanel();
         add(drawPanel);
 
@@ -61,7 +65,9 @@ public class MyFrame extends Frame {
         // 메뉴바를 프레임에 설정합니다.
         setMenuBar(mb);
 
+        // 메뉴 아이템에 기능을 추가하는 코드
         // 메뉴 아이템에 ActionListener를 추가하여 도형 유형을 변경하도록 설정합니다.
+        // 도형 유형 메뉴에 기능을 추가
         draw_line.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +91,7 @@ public class MyFrame extends Frame {
         });
 
         // 메뉴 아이템에 ActionListener를 추가하여 도형 색상을 변경하도록 설정합니다.
+        // 도형 색상 메뉴에 기능을 추가
         draw_red.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,6 +115,7 @@ public class MyFrame extends Frame {
         });
 
         // 메뉴 아이템에 ActionListener를 추가하여 파일을 열고, 저장하도록 설정합니다.
+        // 파일 저장 메뉴에 기능을 추가
         // 파일 저장에 대한 이벤트 처리
         save_file.addActionListener(new ActionListener() {
             @Override
@@ -128,7 +136,6 @@ public class MyFrame extends Frame {
                 }
             }
         });
-
         // 파일 열기에 대한 이벤트 처리
         open_file.addActionListener(new ActionListener() {
             @Override
@@ -156,22 +163,11 @@ public class MyFrame extends Frame {
             }
         });
 
-
         // 기본 설정 추가
+        // 프레임(창)의 제목, 크기 등 설정
         setTitle("Drawing Application");
         setSize(700, 500);
         setVisible(true);
-
-        // 자바에서는 클래스 안에 클래스를 만들 수 있습니다.
-//        class MyLineEvent implements ActionListener {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("선 그리기를 눌렀어요!");
-//            }
-//        }
-//        MyLineEvent myLineEvent = new MyLineEvent();
-//        draw_line.addActionListener(myLineEvent);
-
 
     }
 
