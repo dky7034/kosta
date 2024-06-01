@@ -1,9 +1,12 @@
 package com.kosta.gamegamegame;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.ArrayList;
 
 // JPanel을 상속받고 KeyListener 인터페이스를 구현하는 MyPanel 클래스를 만듭니다.
@@ -26,7 +29,7 @@ public class MyPanel extends JPanel implements KeyListener {
 
         // 적, 플레이어, 미사일 객체를 각각 생성합니다. 생성 시에 이미지 파일명을 전달합니다.
         enemy = new Enemy("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/enemy.png");
-        player = new Player("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/player.jpeg");
+        player = new Player("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/jejus.jpeg");
 //        missile = new Missile("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/thunder02.png");
         // 미사일 객체는 리스트로 생성합니다.
         missileList = new ArrayList<>();
@@ -51,8 +54,16 @@ public class MyPanel extends JPanel implements KeyListener {
                 }
                 // 화면을 다시 그리도록 요청합니다.
                 repaint();
+
+                // 적이 맞았는지 여부를 확인하여 충돌 상태를 설정합니다.
+                for (Missile missile : missileList) {
+                    if (enemy.isHit(missile)) {
+                        break;
+                    }
+                }
+
+                // 0.035초 동안 일시 중지하여 애니메이션 속도를 조절합니다.
                 try {
-                    // 0.035초 동안 일시 중지하여 애니메이션 속도를 조절합니다.
                     Thread.sleep(35);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

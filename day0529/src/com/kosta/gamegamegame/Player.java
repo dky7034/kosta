@@ -10,8 +10,8 @@ public class Player extends GraphicObject {
         // 부모 생성자인 GraphicObject 생성자에게 전달합니다.
         super(name);
         // 맨 처음 플레이어의 위치를 설정합니다.
-        x = 350;
-        y = 475;
+        x = 0; // + 하면 오른쪽으로 이동
+        y = 0; // - 하면 위로 이동
     }
 
     // KeyPressed 메서드를 오버라이딩 합니다.
