@@ -3,18 +3,20 @@ package com.kosta.exam01;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class NotePad extends JFrame {
+public class NotePad04 extends JFrame {
+    // 파일을 어느 경로에 저장할건지 설정하기 위한 JFileChooser
+    JFileChooser jfc;
     // 텍스트가 입력되는 공간
     JTextArea jta;
     // 생성자
-    public NotePad() {
+    public NotePad04() {
         // 제목 설정
 //        setTitle("메모장");
         super("메모장");
+        jfc = new JFileChooser("/Users/Donggyun/data");
         // 생성자 호출 시 텍스트를 입력하는 JTextArea 객체 생성
         jta = new JTextArea();
         // TextArea에 스크롤바를 감싸는 역할을 함
@@ -57,23 +59,27 @@ public class NotePad extends JFrame {
         file_open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    // 텍스트 파일을 읽어오는 방법:
-                    FileReader fr = new FileReader("/Users/donggyun/data/note.txt");
-                    // 파일로부터 한 문자를 읽어서 변수 ch에 저장
-                    int ch;
-                    // ch(정수형)를 문자 타입으로 변환하여 저장하기 위한 변수 String data를 생성
-                    String data = "";
-                    // 파일을 끝까지 읽기 위한 반복문
-                    while ((ch = fr.read()) != -1) {
-                        data += (char) ch;
+                // 열기 다이얼로그를 띄움
+                // 반환값 => 취소: 1 / 열기: 0
+                int result = jfc.showOpenDialog(null);
+                if (result == 0) {
+                    try {
+                        // 텍스트 파일을 읽어오는 방법:
+                        FileReader fr = new FileReader(jfc.getSelectedFile());
+                        // 파일로부터 한 문자를 읽어서 변수 ch에 저장
+                        int ch;
+                        // ch(정수형)를 문자 타입으로 변환하여 저장하기 위한 변수 String data를 생성
+                        String data = "";
+                        // 파일을 끝까지 읽기 위한 반복문
+                        while ((ch = fr.read()) != -1) {
+                            data += (char) ch;
+                        }
+                        // 텍스트 필드에 읽어들인 문자열을 설정
+                        jta.setText(data);
+                    } catch (Exception exception) {
+                        System.out.println("예외 발생: " + exception.getMessage());
                     }
-                    // 텍스트 필드에 읽어들인 문자열을 설정
-                    jta.setText(data);
-                } catch (Exception exception) {
-                    System.out.println("예외 발생: " + exception.getMessage());
                 }
-
             }
         });
         // 저장
@@ -83,23 +89,28 @@ public class NotePad extends JFrame {
                 // TextArea에 입력된 텍스트를 가져와서 변수 data에 저장
                 String data = jta.getText();
                 System.out.println(data);
-
-                try {
-                    // 텍스트 파일을 기록하는 방법:
-                    FileWriter fw = new FileWriter("/Users/donggyun/data/note.txt");
-                    fw.write(data);
-                    fw.close();
-                } catch (Exception exception) {
-                    System.out.println("예외 발생: " + exception.getMessage());
+                // 저장 다이얼로그를 띄움
+                // 다이얼로그에서 취소를 누르면 1, 저장을 누르면 0을 반환함
+                // 취소: 1 / 저장: 0
+                int result = jfc.showSaveDialog(null);
+                if (result == 0) {
+                    try {
+                        // 텍스트 파일을 기록하는 방법:
+                        // 선택한 파일을 저장
+                        FileWriter fw = new FileWriter(jfc.getSelectedFile());
+                        fw.write(data);
+                        fw.close();
+                    } catch (Exception exception) {
+                        System.out.println("예외 발생: " + exception.getMessage());
+                    }
                 }
-
             }
         });
     }
 
     // 메인 메서드
     public static void main(String[] args) {
-        new NotePad();
+        new NotePad04();
     }
 
 }

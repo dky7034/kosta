@@ -3,15 +3,14 @@ package com.kosta.exam01;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class NotePad extends JFrame {
+public class NotePad02 extends JFrame {
     // 텍스트가 입력되는 공간
     JTextArea jta;
     // 생성자
-    public NotePad() {
+    public NotePad02() {
         // 제목 설정
 //        setTitle("메모장");
         super("메모장");
@@ -62,14 +61,13 @@ public class NotePad extends JFrame {
                     FileReader fr = new FileReader("/Users/donggyun/data/note.txt");
                     // 파일로부터 한 문자를 읽어서 변수 ch에 저장
                     int ch;
-                    // ch(정수형)를 문자 타입으로 변환하여 저장하기 위한 변수 String data를 생성
-                    String data = "";
+                    StringBuffer data = new StringBuffer();
                     // 파일을 끝까지 읽기 위한 반복문
                     while ((ch = fr.read()) != -1) {
-                        data += (char) ch;
+                        data.append((char) ch);
                     }
+                    jta.setText(data.toString());
                     // 텍스트 필드에 읽어들인 문자열을 설정
-                    jta.setText(data);
                 } catch (Exception exception) {
                     System.out.println("예외 발생: " + exception.getMessage());
                 }
@@ -99,7 +97,7 @@ public class NotePad extends JFrame {
 
     // 메인 메서드
     public static void main(String[] args) {
-        new NotePad();
+        new NotePad02();
     }
 
 }
