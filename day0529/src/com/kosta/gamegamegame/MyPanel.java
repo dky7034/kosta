@@ -8,11 +8,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 // JPanel을 상속받고 KeyListener 인터페이스를 구현하는 MyPanel 클래스를 만듭니다.
 public class MyPanel extends JPanel implements KeyListener {
     // 게임 구성 요소인 적, 플레이어, 미사일을 멤버변수로 선언합니다.
-    Enemy enemy;
+    // 적을 여러 명으로 만들기 위해 리스트로 선언합니다.
+    ArrayList<Enemy> enemies;
     Player player;
     // 미사일을 여러 개 생성하기 위해 리스트로 변수를 선언합니다.
     ArrayList<Missile> missileList;
@@ -28,9 +30,12 @@ public class MyPanel extends JPanel implements KeyListener {
         setFocusable(true);
 
         // 적, 플레이어, 미사일 객체를 각각 생성합니다. 생성 시에 이미지 파일명을 전달합니다.
-        enemy = new Enemy("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/enemy.png");
+        // 적 객체는 리스트로 생성합니다.
+        enemies = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            enemies.add(new Enemy("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/enemy.png"));
+        }
         player = new Player("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/jejus.jpeg");
-//        missile = new Missile("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/thunder02.png");
         // 미사일 객체는 리스트로 생성합니다.
         missileList = new ArrayList<>();
 
@@ -45,9 +50,12 @@ public class MyPanel extends JPanel implements KeyListener {
         public void run() {
             while (true) {
                 // 각 객체의 위치를 업데이트합니다.
-                enemy.update();
+                // 적 리스트의 각 적을 업데이트합니다.
+                for (Enemy e : enemies) {
+                    e.update();
+                }
+                // 플레이어 업데이트
                 player.update();
-//                missile.update();
                 // 미사일 리스트의 각 미사일을 업데이트합니다.
                 for (Missile missile : missileList) {
                     missile.update();
@@ -57,8 +65,18 @@ public class MyPanel extends JPanel implements KeyListener {
 
                 // 적이 맞았는지 여부를 확인하여 충돌 상태를 설정합니다.
                 for (Missile missile : missileList) {
-                    if (enemy.isHit(missile)) {
-                        break;
+                    for (Enemy enemy : enemies) {
+                        if (enemy.isHit(missile)) {
+                            File file = new File("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/EXPLODE.WAV");
+                            try {
+                                Clip clip = AudioSystem.getClip();
+                                clip.open(AudioSystem.getAudioInputStream(file));
+                                clip.start();
+                                enemy.x = -3000;
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
                     }
                 }
 
@@ -76,9 +94,10 @@ public class MyPanel extends JPanel implements KeyListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        enemy.draw(g);
+        for (Enemy enemy : enemies) {
+            enemy.draw(g);
+        }
         player.draw(g);
-//        missile.draw(g);
         for (Missile missile : missileList) {
             missile.draw(g);
         }
@@ -88,9 +107,10 @@ public class MyPanel extends JPanel implements KeyListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        enemy.draw(g);
+        for (Enemy enemy : enemies) {
+            enemy.draw(g);
+        }
         player.draw(g);
-//        missile.draw(g);
         for (Missile missile : missileList) {
             missile.draw(g);
         }
@@ -108,12 +128,19 @@ public class MyPanel extends JPanel implements KeyListener {
         // 플레이어의 keyPressed 메서드를 호출하면서 키 이벤트를 전달합니다.
         player.keyPressed(e);
         // 미사일의 keyPressed 메서드를 호출하면서 키 이벤트와 플레이어의 위치(x, y)를 전달합니다.
-//        missile.keyPressed(e, player.x, player.y);
-        // 스페이스 키를 눌렀을 때 새로운 미사일을 발사합니다.
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             Missile missile = new Missile("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/thunder02.png");
             missile.keyPressed(e, player.x, player.y);
             missileList.add(missile);
+            // Play laser sound when missile is fired
+            File soundFile = new File("/Users/donggyun/intellij-workspace/kosta/day0529/src/com/kosta/LASER.wav");
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(soundFile));
+                clip.start();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
