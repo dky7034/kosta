@@ -39,7 +39,6 @@ public class GoodsTest extends JFrame {
         table = new JTable(rowData, colNames);
         JScrollPane jsp = new JScrollPane(table);
 
-
         jtf_no = new JTextField();
         jtf_item = new JTextField();
         jtf_qty = new JTextField();
